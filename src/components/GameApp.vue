@@ -39,6 +39,7 @@ const addSprite = () => {
 
     //  `add.sprite` is a Phaser GameObjectFactory method and it returns a Sprite Game Object instance
     const star = scene.add.sprite(x, y, 'star')
+    star.setScale(0.05)
 
     //  ... which you can then act upon. Here we create a Phaser Tween to fade the star sprite in and out.
     //  You could, of course, do this from within the Phaser Scene code, but this is just an example
@@ -48,7 +49,7 @@ const addSprite = () => {
       duration: 500 + Math.random() * 1000,
       alpha: 0,
       yoyo: true,
-      repeat: -1
+      repeat: 5
     })
   }
 }
