@@ -25,9 +25,10 @@ export class Preloader extends Scene {
   preload() {
     //  Load the assets for the game - Replace with your own assets
     this.load.setPath('./src/assets')
-    this.load.image('skeleton', 'skeleton.png')
+    this.load.image('player', 'player.png')
     this.load.image('logo', 'logo.png')
-    //this.load.image('star', 'star.png')
+    this.load.atlas('player_anim', 'player_anim.png', 'player_anim.json')
+    this.load.image('star', 'star.png')
   }
 
   create() {
