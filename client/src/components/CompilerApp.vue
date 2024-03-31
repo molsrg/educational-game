@@ -4,7 +4,7 @@
       class="compiler"
       title="Вот твоё задание"
       subtitle="Прочитай задание и вставь код"
-      text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam vitae exercitationem rerum magnam corporis ut ex illum quia a! Provident, quis. Neque, perferendis fugiat unde itaque ab nemo minima aperiam vitae consequatur, voluptate excepturi hic quidem iusto cupiditate, ullam maxime! Et, libero! Sequi dolores similique modi nisi, reiciendis fugit?"
+      text="Напишите функцию, возвращающую минимальное и максимальное значение в массиве. Наверняка вы этого еще не делали!"
     >
       <v-text-field label="Label" v-model="task" style='padding: 15px;'></v-text-field>
 
@@ -23,12 +23,23 @@
 <script setup>
 import { useAppStore } from "@/store/app.js";
 import { ref } from "vue";
+import axios from 'axios';
 const appStore = useAppStore();
 const task = ref("");
 
 const submitTask = () => {
   console.log(task.value);
-  appStore.changeOpenCreateModal();
+  axios.post('http://localhost:5000/tasks/1', {
+    code: task.value
+  })
+  .then(function (response) {
+    console.log(response);
+    appStore.changeOpenCreateModal();
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+  // Для Сереги: нужно чтобы ошибка появлялась у пользователя на экране. Она обычно лежит в response.data.error
 };
 </script>
 

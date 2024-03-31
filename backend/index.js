@@ -4,7 +4,7 @@ const VMrouter = require('./routes/VMrouter');
 //const taskRouter = require('./routes/taskRouter');
 const PORT = process.env.PORT || 5000;
 const app = express();
-const allowedOrigins = ['http://localhost:5173', 'http://another-domain.com'];
+const allowedOrigins = ['http://localhost:3000', 'http://another-domain.com'];
 
 app.use(
   cors({
@@ -18,7 +18,7 @@ app.use(
   })
 );
 app.use(express.json());
-app.use('/runCode', VMrouter);
+app.use('/tasks', VMrouter);
 //app.use('/task', taskRouter);
 
 const start = async () => {
