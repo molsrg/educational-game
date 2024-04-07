@@ -8,8 +8,9 @@ export class Game extends Scene {
   }
 
   create() {
+    let { width, height } = this.sys.game.canvas;
     this.cameras.main.setBackgroundColor(0x30f0f0)
-    this.player = this.add.sprite(500, 400, 'player_anim')
+    this.player = this.add.sprite(width/2, height/2, 'player_anim')
     var frameNames = this.textures.get('player_anim').getFrameNames()
     console.log(frameNames)
     this.anims.create({
