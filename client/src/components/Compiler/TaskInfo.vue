@@ -1,31 +1,33 @@
 <template>
-  <v-card width="45vw" class="task-info">
-    <h3>Примеры:</h3>
-    <v-list-item
-      v-for="example in props.taskInfo.examples"
-      :key="example.input"
-    >
-      <p>Входные данные: {{ example.input }}</p>
-      <p>Выходные данные: {{ example.output }}</p>
-    </v-list-item>
+  <v-card  title="Задание" :subtitle="taskInfo.title">
+    <h4 class="task-info-title">Требования:</h4>
+    <v-list lines="one">
+      <v-list-item
+        v-for="requirement in props.taskInfo.requirements"
+        :key="requirement"
 
-    <h3>Требования:</h3>
+      >
+        <template v-slot:prepend>
+          <v-icon icon="mdi-head-flash" size="small"></v-icon>
+        </template>
+        {{ requirement }}
+      </v-list-item>
+    </v-list>
 
-    <v-list-item
-      v-for="requirement in props.taskInfo.requirements"
-      :key="requirement"
-    >
-      {{ requirement }}
-    </v-list-item>
 
-    <h3>Ограничения:</h3>
+    <h4 class="task-info-title">Ограничения:</h4>
+    <v-list lines="one">
+      <v-list-item
+        v-for="constraint in props.taskInfo.constraints"
+        :key="constraint"
 
-    <v-list-item
-      v-for="constraint in props.taskInfo.constraints"
-      :key="constraint"
-    >
-      {{ constraint }}
-    </v-list-item>
+      >
+        <template v-slot:prepend>
+          <v-icon icon="mdi-alert-box-outline" size="small"></v-icon>
+        </template>
+        {{ constraint }}
+      </v-list-item>
+    </v-list>
   </v-card>
 </template>
 
@@ -36,8 +38,7 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
-.task-info {
-  padding: 0 10px;
-  margin: 0 10px;
+.task-info-title {
+  margin-left: 15px;
 }
 </style>

@@ -1,13 +1,15 @@
 <template>
-  <v-dialog v-model="appStore.openCompilerModal" width="90vw" height="90vh">
-    <v-card
-      class="task"
-      :title="taskInfo.title"
-    >
-      <div class="task-container">
-        <TaskInfo class="task-info" :task-info='taskInfo'/>
-        <TaskCompiler class="task-compiler" v-model:task-answer="taskAnswer"/>
+  <v-dialog v-model="appStore.openCompilerModal" >
+    <v-card>
+      <div class="task">
+        <TaskCompiler class="task-compiler" v-model:task-answer="taskAnswer" />
+        <div class="task-container">
+          <TaskInfo class="task-info task-container-item" :task-info="taskInfo" />
+
+          <TaskExamples class="task-examples task-container-item" :task-info="taskInfo" />
+        </div>
       </div>
+
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn @click="submitTask()">Отправить на проверку</v-btn>
@@ -16,8 +18,6 @@
       </v-card-actions>
     </v-card>
   </v-dialog>
-
-  <v-btn @click="appStore.changeOpenCreateModal">Открыть диалог</v-btn>
 </template>
 
 <script setup>
@@ -25,13 +25,13 @@ import { ref } from "vue";
 import axios from "axios";
 
 import TaskInfo from "./Compiler/TaskInfo.vue";
+import TaskExamples from "./Compiler/TaskExamples.vue";
 import TaskCompiler from "./Compiler/TaskCompiler.vue";
 
 import { useAppStore } from "@/store/app.js";
 const appStore = useAppStore();
 
-
-const taskAnswer = ref('')
+const taskAnswer = ref("");
 const taskInfo = {
   title: "Напишите программу, которая находит наибольший элемент в массиве",
   examples: [
@@ -67,7 +67,7 @@ const submitTask = () => {
     .post("http://localhost:5000/tasks/1", {
       code: taskAnswer.value,
     })
-    .then((response) =>  {
+    .then((response) => {
       console.log(response);
       appStore.changeOpenCreateModal();
     })
@@ -80,9 +80,24 @@ const submitTask = () => {
 
 <style lang="scss" scoped>
 .task {
-  padding: 10px;
-}
-.task-container {
+  padding: 5px;
   display: flex;
+  // background-color: #fff;
 }
+
+.task-compiler {
+  width: 50%;
+  // background-color: red;
+}
+
+.task-container {
+  width: 50%;
+  padding: 0px 5px;
+  // background-color: blue;
+}
+
+.task-container-item {
+  margin-bottom: 5px;
+}
+
 </style>
