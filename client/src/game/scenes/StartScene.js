@@ -1,19 +1,24 @@
 import { EventBus } from '../EventBus'
 import { Scene } from 'phaser'
 import Phaser from 'phaser'
-
-export class Game extends Scene {
+import Matter from 'matter-js'
+export class StartScene extends Scene {
   constructor() {
-    super('Game')
+    super('StartScene')
+    this.viewportWidth = 1024;
+    this.viewportHeight = 768;
   }
 
   create() {
-    let { width, height } = this.sys.game.canvas;
-    this.cameras.main.setBackgroundColor(0x30f0f0)
-    this.player = this.add.sprite(width/2, height/2, 'player_anim')
-    var frameNames = this.textures.get('player_anim').getFrameNames()
-    console.log(frameNames)
-    this.anims.create({
+    let { width, height } = this.sys.game.canvas; // Создаем фон, добавляем переменные высоты и ширины кадра. 
+    this.cameras.main.setBackgroundColor(0x30f0f0);
+    this.matter.world.setBounds(0,0,width,height,2,1,1,1,1); // Создаем мир Matter
+
+    this.player = this.add.sprite(width/2, height/2, 'player_anim') // Создаем gameObject
+    this.playerBody = this.matter.add.rectangle(this.player.x, this.player.y, this.player.width, this.player.height, { isSensor: false });
+    this.matter.add.gameObject(this.player, this.playerBody);
+
+    this.anims.create({  // Создаем анимации для игрока
       key: 'walk_down',
       frames: this.anims.generateFrameNumbers('player_anim', { start: 0, end: 3 }),
       frameRate: 6,
@@ -37,24 +42,20 @@ export class Game extends Scene {
       frameRate: 6,
       repeat: 2
     })
-    //creating a player
-    // try {
-    //   this.anims.createFromAseprite({
-    //     key: 'player_anim_down',
-    //     frames: 0, //this.cache.generateFrameNumbers(),
-    //     frameRate: 3,
-    //     repeat: -1
-    //   })
-    // } catch (err) {
-    //   console.log(err)
-    // }
-    this.keyPressed = this.input.keyboard.addKeys({
+    this.keyPressed = this.input.keyboard.addKeys({ // Создаем кнопки в Phaser.js
       up: Phaser.Input.Keyboard.KeyCodes.W,
       down: Phaser.Input.Keyboard.KeyCodes.S,
       left: Phaser.Input.Keyboard.KeyCodes.A,
       right: Phaser.Input.Keyboard.KeyCodes.D,
       touch: Phaser.Input.Keyboard.KeyCodes.E
     })
+    this.matter.world.add(this.playerBody); // Добавляем мир Matter
+
+    this.door = this.add.sprite(width-50, height/2, 'door'); // Создаем объект двери
+    this.doorHitbox = this.matter.add.rectangle(this.door.x, this.door.y, this.door.width, this.door.height, { isSensor: true });
+    this.matter.add.gameObject(this.door, this.doorHitbox);
+
+    this.matter.collision.create(this.playerBody,this.doorHitbox); 
     EventBus.emit('current-scene-ready', this)
   }
   movePlayerManager() {
@@ -86,19 +87,6 @@ export class Game extends Scene {
     } else {
       this.player.anims.stop()
     }
-
-    // if (
-    //   (this.keyPressed.left.isDown && this.keyPressed.up.isDown) ||
-    //   (this.keyPressed.right.isDown && this.keyPressed.up.isDown)
-    // ) {
-    //   console.log(' L AND U')
-    //   this.player.anims.play('walk_up', true)
-    // } else if (
-    //   (this.keyPressed.left.isDown && this.keyPressed.down.isDown) ||
-    //   (this.keyPressed.right.isDown && this.keyPressed.down.isDown)
-    // ) {
-    //   this.player.anims.play('walk_down', true)
-    // }
   }
   update() {
     this.movePlayerManager()
@@ -112,6 +100,11 @@ export class Game extends Scene {
     } else if (this.keyPressed.down.isDown) {
       console.log('d')
     }
+    console.log(this.player.x,this.player.y)
+    if(Matter.Collision.collides(this.playerBody,this.doorHitbox)!=null && Matter.Collision.collides(this.playerBody,this.doorHitbox).depth>=30){
+      this.changeScene();
+    }
+    //
   }
 
   changeScene() {

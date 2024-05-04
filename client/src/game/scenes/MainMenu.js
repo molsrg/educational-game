@@ -36,7 +36,7 @@ export class MainMenu extends Scene {
       this.logoTween = null;
     }
 
-    this.scene.start("Game");
+    this.scene.start("StartScene");
   }
 
   moveLogo(vueCallback) {

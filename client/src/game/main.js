@@ -1,5 +1,5 @@
 import { Boot } from "./scenes/Boot";
-import { Game } from "./scenes/Game";
+import { StartScene } from "./scenes/StartScene";
 import { GameOver } from "./scenes/GameOver";
 import { MainMenu } from "./scenes/MainMenu";
 import Phaser from "phaser";
@@ -11,7 +11,7 @@ const config = {
   height: 768,
   parent: "game-container",
   backgroundColor: "#028af8",
-  scene: [Boot, Preloader, MainMenu, Game, GameOver],
+  scene: [Boot, Preloader, MainMenu, StartScene, GameOver],
   physics: {
     default: "matter",
     matter: {
@@ -20,11 +20,11 @@ const config = {
     },
   },
   scale: {
-    mode: Phaser.Scale.FIT,
+    //mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
     parent: "game-container",
-    width: window.innerWidth*0.85,
-    height: window.innerHeight*0.85,
+    width: window.innerWidth,
+    height: window.innerHeight,
   },
 };
 
