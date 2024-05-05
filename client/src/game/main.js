@@ -2,6 +2,7 @@ import { Boot } from "./scenes/Boot";
 import { StartScene } from "./scenes/StartScene";
 import { GameOver } from "./scenes/GameOver";
 import { MainMenu } from "./scenes/MainMenu";
+import { Scene2 } from "./scenes/Scene2";
 import Phaser from "phaser";
 import { Preloader } from "./scenes/Preloader";
 
@@ -11,7 +12,7 @@ const config = {
   height: 768,
   parent: "game-container",
   backgroundColor: "#028af8",
-  scene: [Boot, Preloader, MainMenu, StartScene, GameOver],
+  scene: [Boot, Preloader, MainMenu, StartScene, Scene2, GameOver],
   physics: {
     default: "matter",
     matter: {
