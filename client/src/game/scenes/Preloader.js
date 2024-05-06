@@ -30,6 +30,7 @@ export class Preloader extends Scene {
     this.load.atlas("player_anim", "player_anim.png", "player_anim.json");
     this.load.image("star", "star.png");
     this.load.image("door", "door.png",);
+    this.load.image("room", "room.png",);
   }
 
   create() {

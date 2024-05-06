@@ -3,6 +3,7 @@ import { Scene } from 'phaser'
 //import Phaser from 'phaser'
 import Matter from 'matter-js'
 import { Player } from '../models/Player'
+//import { TextBox } from '../models/TextBox'
 export class StartScene extends Scene {
   constructor() {
     super('StartScene')
