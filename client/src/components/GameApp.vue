@@ -61,7 +61,7 @@ const currentScene = (scene) => {
 </script>
 
 <template>
-  <PhaserGame ref="phaserRef" @current-active-scene="currentScene" />
+  <PhaserGame class='game-container' ref="phaserRef" @current-active-scene="currentScene" />
   <div>
     <div>
       <button class="button" @click="changeScene">Change Scene</button>
@@ -78,3 +78,13 @@ const currentScene = (scene) => {
     </div>
   </div>
 </template>
+
+
+<style>
+
+.game-container {
+  width: 1024px;
+  height: 768px;
+}
+
+</style>

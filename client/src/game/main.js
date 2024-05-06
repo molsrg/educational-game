@@ -24,8 +24,8 @@ const config = {
     //mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
     parent: "game-container",
-    width: window.innerWidth,
-    height: window.innerHeight,
+    // width: window.innerWidth,
+    // height: window.innerHeight,
   },
 };
 
