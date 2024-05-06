@@ -11,7 +11,7 @@ export class StartScene extends Scene {
   }
 
   create() {
-    let { width, height } = this.sys.game.canvas; // Создаем фон, добавляем переменные высоты и ширины кадра. 
+    let { width, height } = this.sys.game.canvas; // Создаем фон, добавляем переменные высоты и ширины кадра.
     this.cameras.main.setBackgroundColor(0x30f0f0);
     this.matter.world.setBounds(0,0,width,height,2,1,1,1,1); // Создаем мир Matter
     this.player = new Player(this,width-500,height/2); // Создаем gameObject
@@ -21,7 +21,7 @@ export class StartScene extends Scene {
     this.matter.add.gameObject(this.door, this.doorHitbox);
     this.matter.world.add(this.doorHitbox);
     this.matter.world.add(this.player.body);
-    this.matter.collision.create(this.player,this.doorHitbox); 
+    this.matter.collision.create(this.player,this.doorHitbox);
     EventBus.emit('current-scene-ready', this)
   }
 

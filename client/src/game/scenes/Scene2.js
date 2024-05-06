@@ -19,7 +19,7 @@ export class Scene2 extends Scene {
     this.matter.add.gameObject(this.door, this.doorHitbox);
     this.matter.world.add(this.doorHitbox);
     this.matter.world.add(this.player.body);
-    this.matter.collision.create(this.player,this.doorHitbox);    
+    this.matter.collision.create(this.player,this.doorHitbox);
     EventBus.emit('current-scene-ready', this);
 }
 

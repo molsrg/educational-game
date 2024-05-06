@@ -30,7 +30,7 @@ onUnmounted(() => {
         game.value.destroy(true);
         game.value = null;
     }
-    
+
 });
 
 defineExpose({ scene, game });
@@ -39,3 +39,13 @@ defineExpose({ scene, game });
 <template>
     <div id="game-container"></div>
 </template>
+
+
+<style>
+
+#game-container {
+    width: 1024px;
+    height: 768px;
+}
+
+</style>
