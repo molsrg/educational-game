@@ -28,7 +28,7 @@ export class Scene2 extends Scene {
     const collision = Matter.Collision.collides(this.player.body,this.doorHitbox);
     if (collision!=null &&
       collision.depth>=30) {
-      this.scene.start('StartScene');
+      EventBus.emit('calling-modal',this,1)
     }
   }
   changeScene() {

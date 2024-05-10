@@ -58,11 +58,12 @@ export class StartScene extends Scene {
     });
     //let t= new TextBox(this,100,width/2-fullText.length,height/6,"РААА",true)
     //t.typing();
-
+    console.log(this);
     EventBus.emit("current-scene-ready", this);
   }
 
   update() {
+    console.log(this.game.config.isOpen)
     this.player.update();
     const collision = Matter.Collision.collides(
       this.player.body,

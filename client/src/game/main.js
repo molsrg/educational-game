@@ -20,6 +20,7 @@ const config = {
       gravity: { y: 0 },
     },
   },
+  isOpen: false,
   scale: {
     //mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
@@ -30,7 +31,9 @@ const config = {
 };
 
 const StartGame = (parent) => {
-  return new Phaser.Game({ ...config, parent: parent });
+  var game = new Phaser.Game({ ...config, parent: parent });
+  game.config.isOpen = false;
+  return game;
 };
 
 export default StartGame;

@@ -1,17 +1,18 @@
 <script setup>
 
 // Для Тимура (переменная хранит в себе true/false открытия модалки), доступ к значению переменной через .value
-import { computed } from 'vue'
+//import { computed } from 'vue'
 import { useAppStore } from "@/store/app.js";
 
 const appStore = useAppStore();
-const value = computed(() => appStore.isOpenCreateModal);
+//const value = computed(() => appStore.isOpenCreateModal);
 
 
 
 import { onMounted, onUnmounted, ref } from "vue";
 import { EventBus } from "./EventBus";
 import StartGame from "./main";
+import { watch } from 'vue'
 
 // Save the current scene instance
 const scene = ref();
@@ -25,6 +26,13 @@ onMounted(() => {
     emit("current-active-scene", currentScene);
 
     scene.value = currentScene;
+  });
+  EventBus.on("calling-modal", (currentScene, testId) => {
+    emit("calling-modal", currentScene, testId)
+    console.log("event called");
+  });
+  watch(() => appStore.isOpenCreateModal, (newValue) => {
+    game.value.config.isOpen = newValue;
   });
 });
 
