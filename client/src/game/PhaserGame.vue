@@ -21,7 +21,6 @@ const emit = defineEmits(["current-active-scene"]);
 
 onMounted(() => {
   game.value = StartGame("game-container");
-
   EventBus.on("current-scene-ready", (currentScene) => {
     emit("current-active-scene", currentScene);
 
