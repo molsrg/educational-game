@@ -24,11 +24,24 @@ export class Scene2 extends Scene {
 }
 
   update(){
+    if(this.game.config.isOpen){
+      this.input.keyboard.manager.enabled = false;
+    }
+    else
+    {
+      this.input.keyboard.manager.enabled = true;
+    }
     this.player.update();
-    const collision = Matter.Collision.collides(this.player.body,this.doorHitbox);
-    if (collision!=null &&
-      collision.depth>=30) {
-      EventBus.emit('calling-modal',this,1)
+    let collisionOccurred = false;
+    let collision = Matter.Collision.collides(this.player.body, this.doorHitbox);
+    if (collision != null && collision.depth >= 30 && !collisionOccurred) {
+      EventBus.emit('calling-modal', this, 1);
+      collisionOccurred = true;
+      console.log(collision,collisionOccurred)
+    }
+    else if (collision==null){
+      collisionOccurred = false;
+      console.log(collision,collisionOccurred)
     }
   }
   changeScene() {

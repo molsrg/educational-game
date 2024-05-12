@@ -10,13 +10,13 @@ export class MainMenu extends Scene {
 
   create() {
     let { width, height } = this.sys.game.canvas;
-    this.add.image(600, 600, "background");
-
-    this.logo = this.add.image(width/2,height/2, "logo").setDepth(100);
+    this.bg = this.add.image(width/2, height/2, "background");
+    this.bg.setScale(0.75)
+    this.logo = this.add.image(width/2,height/2-200, "logo").setDepth(100);
     this.logo.setScale(0.15);
 
     this.add
-      .text(width/2, height/2+100, "Main Menu", {
+      .text(width/2, height/2-100, "Main Menu", {
         fontFamily: "Arial Black",
         fontSize: 38,
         color: "#ffffff",
@@ -24,7 +24,17 @@ export class MainMenu extends Scene {
         strokeThickness: 8,
         align: "center",
       })
-      .setDepth(100)
+      .setDepth(300)
+      .setOrigin(0.5);
+      this.add
+      .text(width/2, height/2-25, "Start", {
+        fontFamily: "Arial Black",
+        fontSize: 38,
+        color: "#ffff3f",
+        stroke: "#000000",
+        strokeThickness: 8,
+        align: "center",
+      }).setDepth(300)
       .setOrigin(0.5);
 
     EventBus.emit("current-scene-ready", this);

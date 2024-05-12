@@ -14,24 +14,82 @@ export class StartScene extends Scene {
   create() {
     let { width, height } = this.sys.game.canvas; // Создаем фон, добавляем переменные высоты и ширины кадра.
     this.cameras.main.setBackgroundColor(0x30f0f0);
-    this.matter.world.setBounds(0, 0, width, height, 2, 1, 1, 1, 1); // Создаем мир Matter
+    //this.matter.world.setBounds(0, 0, width, height, 2, 1, 1, 1, 1); // Создаем мир Matter
     this.add.image(width / 2, height / 2, "room");
     this.player = new Player(this, width - 500, height / 2); // Создаем gameObject
 
-    this.door = this.add.sprite(width - 50, height / 2, "door"); // Создаем объект двери
+    this.door = this.add.sprite(width/2, height); // Создаем объект двери
     this.doorHitbox = this.matter.add.rectangle(
       this.door.x,
       this.door.y,
       this.door.width,
       this.door.height,
-      { isSensor: true },
+      { isSensor: true,},
+    );
+    this.leftRoom = this.matter.add.trapezoid(
+      width/2-1005,
+      height/2+100,
+      1000,
+      500,
+      -0.31,
+      { isSensor: false, isStatic: true,  },
+    );
+    this.upRoom = this.matter.add.rectangle(
+      width/2,
+      height/2-420,
+      1000,
+      500,
+      { isSensor: false, isStatic: true },
+    );
+    this.rightRoom = this.matter.add.trapezoid(
+      width/2+980,
+      height/2+100,
+      1000,
+      500,
+      -0.31,
+      { isSensor: false, isStatic: true },
+    );
+    this.downRoomL = this.matter.add.rectangle(
+      width/4-50,
+      height,
+      500,
+      50,
+      { isSensor: false, isStatic: true },
+    );
+    this.downRoomR = this.matter.add.rectangle(
+      width/2+width/4+40,
+      height,
+      500,
+      50,
+      { isSensor: false, isStatic: true },
+    );
+    this.bed = this.matter.add.rectangle(
+      width/2-width/4,
+      height/2+40,
+      300,
+      10,
+      { isSensor: false, isStatic: true },
+    );
+    this.clocks = this.matter.add.rectangle(
+      width/2-width/4-50,
+      height/2,
+      50,
+      50,
+      { isSensor: false, isStatic: true },
+    );
+    this.chair = this.matter.add.rectangle(
+      width/2+width/4-50,
+      height/2-100,
+      200, 
+      50,
+      { isSensor: false, isStatic: true, },
     );
     this.matter.add.gameObject(this.door, this.doorHitbox);
     this.matter.world.add(this.doorHitbox);
     this.matter.world.add(this.player.body);
     this.matter.collision.create(this.player, this.doorHitbox);
 
-    var fullText = "Ночь. Крыши частных секторов.";
+    var fullText = "Квартира. Время: 8:00";
     var text = "";
 
     // Позиционирование текста
@@ -59,11 +117,19 @@ export class StartScene extends Scene {
     //let t= new TextBox(this,100,width/2-fullText.length,height/6,"РААА",true)
     //t.typing();
     console.log(this);
+    this.player
     EventBus.emit("current-scene-ready", this);
   }
 
   update() {
     console.log(this.game.config.isOpen)
+    if(this.game.config.isOpen){
+      this.input.keyboard.manager.enabled = false;
+    }
+    else
+    {
+      this.input.keyboard.manager.enabled = true;
+    }
     this.player.update();
     const collision = Matter.Collision.collides(
       this.player.body,
