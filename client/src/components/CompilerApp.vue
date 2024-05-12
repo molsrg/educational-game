@@ -1,20 +1,18 @@
 <template>
-  <v-dialog v-model="appStore.openCompilerModal" >
-    <v-card>
+  <v-dialog v-model="appStore.openCompilerModal">
+    <v-card min-height='50vh' min-width='80vw' style='margin: auto;'>
       <div class="task">
         <TaskCompiler class="task-compiler" v-model:task-answer="taskAnswer" />
         <div class="task-container">
-          <TaskInfo class="task-info task-container-item" :task-info="taskInfo" />
-
-          <TaskExamples class="task-examples task-container-item" :task-info="taskInfo" />
+          <TaskInfo :task-info="taskInfo" />
+          <TaskExamples :task-info="taskInfo" />
         </div>
       </div>
 
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn @click="submitTask()">Отправить на проверку</v-btn>
-
-        <v-btn @click="appStore.changeOpenCreateModal"> Выход</v-btn>
+        <v-btn @click="appStore.changeOpenCreateModal">Выход</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -82,22 +80,10 @@ const submitTask = () => {
 .task {
   padding: 5px;
   display: flex;
-  // background-color: #fff;
-}
-
-.task-compiler {
-  width: 50%;
-  // background-color: red;
 }
 
 .task-container {
-  width: 50%;
-  padding: 0px 5px;
-  // background-color: blue;
+  margin: 0 0 5px 5px;
+  max-width: 50%;
 }
-
-.task-container-item {
-  margin-bottom: 5px;
-}
-
 </style>

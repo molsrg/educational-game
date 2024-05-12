@@ -1,25 +1,37 @@
 <template>
-  <v-textarea
-    label="Вставь свой код здесь"
-    v-model='taskAnswer'
-    variant="filled"
-    auto-grow
-    @update:model-value="$emit('update:task-answer', $event)"
-  ></v-textarea>
+
+  <textarea
+    class="compiler-textarea"
+    id="editor"
+    v-model="taskAnswer"
+
+  ></textarea>
 </template>
-
 <script setup>
+import { onMounted, ref } from "vue";
+import * as CodeMirror from "codemirror";
+import "codemirror/lib/codemirror.css";
+import "codemirror/theme/darcula.css";
+import "codemirror/mode/javascript/javascript.js";
 
-import { ref } from 'vue'
-
-const taskAnswer = ref('')
-
+let taskAnswer = ref("// Введи код здесь...\n");
+onMounted(() => {
+  CodeMirror.fromTextArea(document.getElementById("editor"), {
+    lineNumbers: true,
+    theme: "darcula",
+    mode: "javascript",
+    lineWrapping: true,
+    // autofocus: true
+  });
+});
 </script>
-
-<style lang="scss" scoped>
-
-
-
+<style>
+.compiler-textarea {
+  width: 55%;
+  height: 100%;
+}
+.CodeMirror {
+  width: 55%;
+  height: 100%;
+}
 </style>
-
-

@@ -5,10 +5,10 @@
       <v-list-item
         v-for="requirement in props.taskInfo.requirements"
         :key="requirement"
-
+        density='compact'
       >
         <template v-slot:prepend>
-          <v-icon icon="mdi-head-flash" size="small"></v-icon>
+          <v-icon icon="mdi-information-outline" size="small"></v-icon>
         </template>
         {{ requirement }}
       </v-list-item>
@@ -20,10 +20,10 @@
       <v-list-item
         v-for="constraint in props.taskInfo.constraints"
         :key="constraint"
-
+        density='compact'
       >
         <template v-slot:prepend>
-          <v-icon icon="mdi-alert-box-outline" size="small"></v-icon>
+          <v-icon icon="mdi-alert-outline" size="small"></v-icon>
         </template>
         {{ constraint }}
       </v-list-item>
