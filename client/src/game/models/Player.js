@@ -84,4 +84,10 @@ export class Player extends Phaser.Physics.Matter.Sprite {
       this.anims.stop()
     }
   }
+  sleep(){
+    this.keyPressed.up.reset();
+    this.keyPressed.down.reset();
+    this.keyPressed.left.reset();
+    this.keyPressed.right.reset();
+  }
 }

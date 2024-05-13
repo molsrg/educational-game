@@ -6,9 +6,6 @@ import { useAppStore } from "@/store/app.js";
 
 const appStore = useAppStore();
 //const value = computed(() => appStore.isOpenCreateModal);
-
-
-
 import { onMounted, onUnmounted, ref } from "vue";
 import { EventBus } from "./EventBus";
 import StartGame from "./main";
