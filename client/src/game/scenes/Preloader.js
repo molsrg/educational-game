@@ -6,8 +6,10 @@ export class Preloader extends Scene {
   }
 
   init() {
+    let { width, height } = this.sys.game.canvas;
     //  We loaded this image in our Boot Scene, so we can display it here
-    this.add.image(0, 0, "background");
+    this.bg = this.add.image(width/2, height/2, "background");
+    this.bg.setScale(0.75)
 
     //  A simple progress bar. This is the outline of the bar.
     this.add.rectangle(512, 384, 468, 32).setStrokeStyle(1, 0xffffff);
@@ -31,6 +33,7 @@ export class Preloader extends Scene {
     this.load.image("star", "star.png");
     this.load.image("door", "door.png",);
     this.load.image("room", "room.png",);
+    this.load.image("room2", "room2.png",);
   }
 
   create() {

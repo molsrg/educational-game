@@ -14,7 +14,6 @@ export class StartScene extends Scene {
   create() {
     let { width, height } = this.sys.game.canvas; // Создаем фон, добавляем переменные высоты и ширины кадра.
     this.cameras.main.setBackgroundColor(0x30f0f0);
-    //this.matter.world.setBounds(0, 0, width, height, 2, 1, 1, 1, 1); // Создаем мир Matter
     this.add.image(width / 2, height / 2, "room");
     this.player = new Player(this, width - 500, height / 2); // Создаем gameObject
 
@@ -114,15 +113,10 @@ export class StartScene extends Scene {
       },
       callbackScope: this,
     });
-    //let t= new TextBox(this,100,width/2-fullText.length,height/6,"РААА",true)
-    //t.typing();
-    console.log(this);
-    this.player
     EventBus.emit("current-scene-ready", this);
   }
 
   update() {
-    console.log(this.game.config.isOpen)
     if(this.game.config.isOpen){
       this.input.keyboard.manager.enabled = false;
     }

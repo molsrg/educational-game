@@ -26,6 +26,7 @@ export class MainMenu extends Scene {
       })
       .setDepth(300)
       .setOrigin(0.5);
+
       this.add
       .text(width/2, height/2-25, "Start", {
         fontFamily: "Arial Black",
