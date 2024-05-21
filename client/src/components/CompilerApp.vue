@@ -33,7 +33,7 @@ const taskAnswer = ref("");
 
 
 const submitTask = () => {
-  appStore.submitTask(taskAnswer)
+  appStore.submitTask(taskAnswer.value, taskInfo.value.id)
   // Для Сереги: нужно чтобы ошибка появлялась у пользователя на экране. Она обычно лежит в response.data.error
 };
 </script>

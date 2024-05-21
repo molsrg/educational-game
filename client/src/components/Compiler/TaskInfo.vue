@@ -1,5 +1,5 @@
 <template>
-  <v-card  title="Задание" :subtitle="taskInfo.title">
+  <v-card  :title="'Задание ' + taskInfo.id" :subtitle="taskInfo.title">
     <h4 class="task-info-title">Требования:</h4>
     <v-list lines="one">
       <v-list-item

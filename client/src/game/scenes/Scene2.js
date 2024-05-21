@@ -39,7 +39,7 @@ export class Scene2 extends Scene {
     if (collision != null && collision.depth >= 30 && !this.collisionOccurred) {
       EventBus.emit('calling-modal', this, 1);
       this.collisionOccurred = true;
-      console.log("emited calling modal");  
+      console.log("emited calling modal");
     }
     else if (collision != null && collision.depth <= 30 && !this.collisionOccurred && !this.game.config.isOpen){
       this.collisionOccurred = false;
@@ -47,7 +47,7 @@ export class Scene2 extends Scene {
     else if (collision==null){
       this.collisionOccurred = false;
     }
-    
+
     //console.log(collision!=null,collision!=null?collision.depth:"0",this.collisionOccurred)
   }
   changeScene() {

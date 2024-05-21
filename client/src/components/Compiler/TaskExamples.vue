@@ -11,7 +11,7 @@
         <template v-slot:prepend>
           <v-icon icon="mdi-calendar-check-outline" size="small"></v-icon>
         </template>
-        <p>Входные данные: [ {{ example.input }} ]</p>
+        <p>Входные данные: {{ example.input }}</p>
       <p>Выходные данные: {{ example.output }}</p>
       </v-list-item>
     </v-list>

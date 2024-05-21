@@ -5,7 +5,8 @@ import axios from "axios";
 export const useAppStore = defineStore("app", {
   state: () => ({
     openCompilerModal: false,
-    currentTask: {}
+    currentTask: {},
+    completedTask: [],
   }),
   getters: {
     isOpenCreateModal(state) {
@@ -20,43 +21,27 @@ export const useAppStore = defineStore("app", {
       this.openCompilerModal = !this.openCompilerModal;
     },
     getTaskFromServer(taskID) {
-      // Логика запроса на сервер за заданием
-      const response = {
-        title: "Напишите функцию для нахождения максимального из трех чисел",
-        examples: [
-          {
-            input: "3 5 1",
-            output: "5",
-          },
-          {
-            input: "-2 0 2",
-            output: "2",
-          },
-          {
-            input: "100 -1000 500",
-            output: "500",
-          },
-        ],
-        requirements: [
-          "Функция должна принимать три целых числа, разделенных пробелом.",
-          "Функция должна возвращать наибольшее из трех чисел.",
-          "Функция должна корректно работать со всеми предоставленными примерами входных данных.",
-        ],
-        constraints: [
-          "Значения чисел могут быть от -1000 до 1000.",
-          "Время выполнения функции не должно превышать 1 секунду.",
-        ],
-      };
-
-      this.currentTask = response;
-    },
-    submitTask(taskAnswer) {
       axios
-        .post("http://localhost:5000/tasks/1", {
-          code: taskAnswer.value,
+        .post("http://localhost:5000/tasks/getTests", {
+          testId: taskID,
         })
         .then((response) => {
-          console.log(response);
+          this.currentTask = response.data.tests;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    submitTask(taskAnswer, taskID) {
+      axios
+        .post("http://localhost:5000/tasks/runCode", {
+          code: taskAnswer,
+          taskId: taskID
+        })
+        .then((response) => {
+          if(response.data.success) {
+            this.completedTask.push(taskID)
+          }
           this.changeOpenCreateModal();
         })
         .catch((error) => {
