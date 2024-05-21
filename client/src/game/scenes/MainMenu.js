@@ -13,7 +13,7 @@ export class MainMenu extends Scene {
     this.bg = this.add.image(width/2, height/2, "background");
     this.bg.setScale(0.75)
     this.logo = this.add.image(width/2,height/2-200, "logo").setDepth(100);
-    this.logo.setScale(0.15);
+    this.logo.setScale(0.2);
 
     this.add
       .text(width/2, height/2-100, "Main Menu", {
@@ -27,8 +27,7 @@ export class MainMenu extends Scene {
       .setDepth(300)
       .setOrigin(0.5);
 
-      this.add
-      .text(width/2, height/2-25, "Start", {
+      let button =this.add.text(width/2, height/2-25, "Start", {
         fontFamily: "Arial Black",
         fontSize: 38,
         color: "#ffff3f",
@@ -37,6 +36,10 @@ export class MainMenu extends Scene {
         align: "center",
       }).setDepth(300)
       .setOrigin(0.5);
+      button.setInteractive();
+      button.on('pointerdown', function (event) {
+        this.changeScene();
+      }, this);
 
     EventBus.emit("current-scene-ready", this);
   }

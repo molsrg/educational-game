@@ -28,12 +28,13 @@ export class Preloader extends Scene {
     //  Load the assets for the game - Replace with your own assets
     this.load.setPath("./src/assets");
     this.load.image("player", "player.png");
-    this.load.image("logo", "logo.png");
+    this.load.image("logo", "icon.png");
     this.load.atlas("player_anim", "player_anim.png", "player_anim.json");
     this.load.image("star", "star.png");
     this.load.image("door", "door.png",);
     this.load.image("room", "room.png",);
     this.load.image("room2", "room2.png",);
+    this.load.audio('music', [ '../assets/dreams.mp3']);
   }
 
   create() {
