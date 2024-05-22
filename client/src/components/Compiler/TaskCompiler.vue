@@ -1,5 +1,6 @@
 <template>
-  <textarea class="compiler-textarea" id="editor" ref="textarea"></textarea>
+    <textarea class="compiler-textarea" id="editor" ref="textarea"></textarea>
+
 </template>
 
 <script setup>
@@ -41,7 +42,10 @@ onBeforeUnmount(() => {
   editor.toTextArea();
 });
 </script>
+
+
 <style>
+
 .compiler-textarea {
   width: 55%;
   height: 100%;
@@ -50,4 +54,5 @@ onBeforeUnmount(() => {
   width: 55%;
   height: 100%;
 }
+
 </style>

@@ -1,11 +1,12 @@
 <template>
   <v-dialog v-model="appStore.openCompilerModal">
-    <v-card min-height='40vh' min-width='80vw' style='margin: auto;'>
+    <v-card min-height='40vh' min-width='80vw' style='margin: auto; '>
       <div class="task">
         <TaskCompiler class="task-compiler" v-model:task-answer="taskAnswer" />
         <div class="task-container">
           <TaskInfo :task-info="taskInfo" />
           <TaskExamples :task-info="taskInfo" />
+          <v-alert closable variant="tonal"  icon="mdi-fire-alert" v-if='compilerError.length > 0' :text="compilerError"></v-alert>
         </div>
       </div>
 
@@ -15,7 +16,10 @@
         <v-btn @click="appStore.changeOpenCreateModal">Выход</v-btn>
       </v-card-actions>
     </v-card>
+
   </v-dialog>
+
+
 </template>
 
 <script setup>
@@ -30,11 +34,10 @@ const appStore = useAppStore();
 
 const taskInfo = computed(() => appStore.getTaskFromState)
 const taskAnswer = ref("");
-
+const compilerError = computed(() => appStore.getTaskError)
 
 const submitTask = () => {
   appStore.submitTask(taskAnswer.value, taskInfo.value.id)
-  // Для Сереги: нужно чтобы ошибка появлялась у пользователя на экране. Она обычно лежит в response.data.error
 };
 </script>
 
@@ -48,4 +51,9 @@ const submitTask = () => {
   margin: 0 0 5px 5px;
   max-width: 50%;
 }
+.task-container * {
+  margin-top: 10px;
+}
+
+
 </style>
